@@ -34,7 +34,14 @@ const syncDatabase = async () => {
 // Import Express application
 const express = require("express");
 // Create an Express application called "app"
+var cors = require('cors')
 const app = express();
+app.use(cors())
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 /* SET UP ROUTES */
 // Import sub-routes and associated router functions
@@ -80,5 +87,5 @@ bootApp();
 
 /* ACTIVATE THE SERVER PORT */
 // Set up express application to use port 5000 as the access point for the server application.
-const PORT = 5000;  // Server application access point port number
+const PORT = 9000;  // Server application access point port number
 app.listen(PORT, console.log(`Server started on ${PORT}`));
