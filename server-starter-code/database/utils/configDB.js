@@ -6,7 +6,7 @@ It declares and exports the variables for database name, username, and password.
 // Declare the variables for database name, username, and password.
 const dbName = 'starter-server';
 const dbUser = 'postgres';
-const dbPwd = 'Ramens2435!';
+const dbPwd = '123';
 
 // Export the variables 
 module.exports = {
