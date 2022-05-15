@@ -20,7 +20,9 @@ class StudentEditContainer extends Component {
     this.state = {
       firstname: "", 
       lastname: "", 
-      campusId: null, 
+      campusId: "",
+      email:"",
+      GPA:"",
       redirect: false, 
       redirectId: null
     };
@@ -40,7 +42,9 @@ class StudentEditContainer extends Component {
     let student = {
         firstname: this.state.firstname,
         lastname: this.state.lastname,
-        campusId: this.state.campusId
+        campusId: this.state.campusId,
+        email: this.state.email,
+        GPA: this.state.GPA,
     };
     
     // Add new student in back-end database
@@ -50,7 +54,9 @@ class StudentEditContainer extends Component {
     this.setState({
       firstname: "", 
       lastname: "", 
-      campusId: null, 
+      campusId: "", 
+      email:"",
+      GPA:"",
       redirect: true, 
       //redirectId: newStudent.id
     });

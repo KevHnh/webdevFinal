@@ -11,7 +11,29 @@ const StudentView = (props) => {
   return (
     <div>
       <h1>{student.firstname + " " + student.lastname}</h1>
-      <h3>{student.campus.name}</h3>
+      <img src={student.images} width="300"></img>
+      {
+        student.campusId !== null ?
+        (
+          <h1>{student.campus.name}</h1>
+        ): 
+        (
+          <div>Currently not enrolled in Any campus</div>
+        )
+      }
+
+      {
+        student.email !== "" ?
+        (
+          <h1>Email: {student.email}</h1>
+        ): 
+        (
+          <h1>Email: NaN</h1>
+        )
+      }
+      
+      <h1>Current GPA: {student.GPA}</h1>
+      
     </div>
   );
 

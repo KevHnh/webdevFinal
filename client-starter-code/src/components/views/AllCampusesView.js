@@ -6,16 +6,45 @@ It constructs a React component to display all campuses.
 ================================================== */
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import axios from 'axios'
+import { useEffect, useState } from 'react';
 
 
 const AllCampusesView = (props) => {
   const {campuses, deleteCampus, editCampus} = props;
+  {/*const [allCampuses, setAllCampuses] = useState([])
+
+  useEffect(()=>{
+    loadAllCampuses();
+},[])
+
+function loadAllCampuses(){
+    axios.get(`http://localhost:9000/api/campuses`, {
+    })
+    fetchCampusJson()
+ }
+
+const fetchCampusJson = async () => {
+    const data = await fetch(`http://localhost:9000/api/campuses`,{mode: 'cors'})
+    const allCampuses = await data.json()
+    setAllCampuses(allCampuses)
+}*/}
+
   // If there is no campus, display a message.
   if (!props.allCampuses.length) {
-    return <div>There are no campuses.</div>;
+    return(
+      <div>
+        <div>There are no campuses.</div>
+        <br/>
+        <Link to={"/newcampus"}>
+          <button>Add New Campus</button>
+        </Link>
+      </div>
+    ) 
   }
 
-  
+  //console.log(allCampuses)
+  console.log(props.allCampuses)
   // If there is at least one campus, render All Campuses view 
   return (
     <div>
@@ -27,8 +56,8 @@ const AllCampusesView = (props) => {
             <h2>{campus.name}</h2>
           </Link>
           <h4>campus id: {campus.id}</h4>
-          <p>{campus.address}</p>
-          <p>{campus.description}</p>
+          <p>campus address: {campus.address}</p>
+          <p>campus description: {campus.description}</p>
           <div>
             <img src={campus.images} width="300"></img>
           </div>

@@ -4,6 +4,7 @@ NewStudentView.js
 The Views component is responsible for rendering web page with data provided by the corresponding Container component.
 It constructs a React component to display the new student page.
 ================================================== */
+import Header from '../containers/Header';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -169,6 +170,7 @@ console.log(allStudents)
   // Render a New Student view with an input form
   return (
     <div>
+      <Header/>
       <h1>Edit Campus</h1>
 
       <div className={classes.root}>
