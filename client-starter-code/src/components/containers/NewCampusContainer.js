@@ -46,7 +46,6 @@ class NewCampusContainer extends Component {
     
     // Add new student in back-end database
     let newCampus = await this.props.addCampus(campus);
-    console.log(newCampus)
 
     // Update state, and trigger redirect to show the new student
     this.setState({
@@ -75,8 +74,8 @@ class NewCampusContainer extends Component {
       <div>
         <Header />
         <NewCampusView 
-          //handleChange = {this.handleChange} 
-          //handleSubmit={this.handleSubmit}      
+          handleChange = {this.handleChange} 
+          handleSubmit={this.handleSubmit}      
         />
       </div>          
     );
