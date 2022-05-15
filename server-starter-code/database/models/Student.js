@@ -15,7 +15,12 @@ const Student = db.define("student", {
   lastname: {
     type: Sequelize.STRING,
     allowNull: false
-  }
+  },
+
+  images: {
+    type: Sequelize.STRING,
+    defaultValue: "https://static.vecteezy.com/system/resources/previews/002/318/271/original/user-profile-icon-free-vector.jpg", 
+  },
 });
 
 // Export the student model

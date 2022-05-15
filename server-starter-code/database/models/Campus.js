@@ -20,6 +20,11 @@ const Campus = db.define("campus", {
 
   description: {
     type: Sequelize.STRING,
+  },
+
+  images: {
+    type: Sequelize.STRING,
+    defaultValue: "https://thumbs.dreamstime.com/b/illustration-building-icon-white-background-building-icon-white-background-107844010.jpg",
   }
 });
 
