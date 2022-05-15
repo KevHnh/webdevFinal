@@ -39,10 +39,21 @@ router.get('/:id', ash(async(req, res) => {
 }));
 
 /* ADD NEW STUDENT */
-router.post('/', function(req, res, next) {
-  Student.create(req.body)
+router.post('/', async function(req, res, next) {
+  var currID = req.body.campusId;
+  var campusId = await Campus.findOne({where: {id: currID}});
+
+  if (campusId) {
+    await Student.create(req.body)
     .then(createdStudent => res.status(200).json(createdStudent))
     .catch(err => next(err));
+  }
+  else if (!campusId) {
+    console.log("CAMPUS ID DOES NOT EXISTS")
+  }
+  else {
+    console.log("ERROR OCCURRED")
+  }
 });
 
 /* DELETE STUDENT */
