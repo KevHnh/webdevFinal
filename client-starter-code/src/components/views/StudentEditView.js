@@ -51,6 +51,7 @@ const StudentEditView = (props) => {
   const [studentLastName, setStudentLastName] = useState("")
   const [studentCampusId, setStudentCampusId] = useState("")
   const [studentEmail, setStudentEmail] = useState("")
+  const [studentImage, setStudentImage] = useState("")
   const [studentGPA, setStudentGPA] = useState("")
   const [ gpaNotify, setGPANotify ] = useState(false)
 
@@ -74,6 +75,7 @@ const fetchStudentJson = async () => {
     setStudentCampusId(items.campusId)
     setStudentEmail(items.email)
     setStudentGPA(items.GPA)
+    setStudentImage(items.images)
 }
 
 useEffect(()=>{
@@ -125,8 +127,10 @@ async function submitEditStudent(){
           "campusId": studentCampusId,
           "email": studentEmail,
           "GPA" : studentGPA,
+          "images" : studentImage
       })
-      
+      window.location.reload(false);
+   
   }
     
 }
@@ -151,17 +155,17 @@ console.log(items)
           </div>
           <form style={{textAlign: 'center'}} >
             <label style= {{color:'#11153e', fontWeight: 'bold'}}>First Name: </label>
-            <input type="text" name="firstname" value={studentFirstName} onChange ={(e) => setStudentFirstName(e.target.value)} />
+            <input type="text" name="firstname" required value={studentFirstName} onChange ={(e) => setStudentFirstName(e.target.value)} />
             <br/>
             <br/>
 
             <label style={{color:'#11153e', fontWeight: 'bold'}}>Last Name: </label>
-            <input type="text" name="lastname" value={studentLastName} onChange ={(e) => setStudentLastName(e.target.value)} />
+            <input type="text" name="lastname" required value={studentLastName} onChange ={(e) => setStudentLastName(e.target.value)} />
             <br/>
             <br/>
 
             <label style={{color:'#11153e', fontWeight: 'bold'}}>Campus Id: </label>
-            <input type="text" name="campusId" value={studentCampusId} onChange ={(e) => setStudentCampusId(e.target.value)} />
+            <input type="text" name="campusId" required value={studentCampusId} onChange ={(e) => setStudentCampusId(e.target.value)} />
             <br/>
             <br/>
 
@@ -171,7 +175,12 @@ console.log(items)
             <br/>
 
             <label style={{color:'#11153e', fontWeight: 'bold'}}>GPA: </label>
-            <input type="text" name="GPA" value={studentGPA} onChange ={(e) => setStudentGPA(e.target.value)} />
+            <input type="text" name="GPA" required value={studentGPA} onChange ={(e) => setStudentGPA(e.target.value)} />
+            <br/>
+            <br/>
+
+            <label style={{color:'#11153e', fontWeight: 'bold'}}>GPA: </label>
+            <input type="text" name="Image" required value={studentImage} onChange ={(e) => setStudentImage(e.target.value)} />
             <br/>
             <br/>
 

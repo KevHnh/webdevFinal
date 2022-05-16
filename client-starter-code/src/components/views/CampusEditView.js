@@ -50,6 +50,7 @@ const CampusEditView = (props) => {
   const [campusName, setCampusName] = useState("")
   const [campusAddress, setCampusAddress] = useState("")
   const [campusDescription, setCampusDescription] = useState("")
+  const [campusImage, setCampusImage] = useState("")
   const [ saveNotify, setSaveNotify ] = useState({isOpen:false, message:"", type:""})
   const [ removeNotify, setRemoveNotify ] = useState({isOpen:false, message:"", type:""})
 
@@ -93,6 +94,7 @@ const fetchJson = async () => {
     setCampusName(items.name)
     setCampusAddress(items.address)
     setCampusDescription(items.description)
+    setCampusImage(items.images)
 }
 
 async function submitEditCampus(){
@@ -100,7 +102,8 @@ async function submitEditCampus(){
     await axios.put(`http://localhost:9000/api/campuses/${campusId}`, {
         "name":campusName, 
         "address": campusAddress, 
-        "description": campusDescription
+        "description": campusDescription,
+        "images" : campusImage,
     })
     
     //redirectPage(`/campuses`)
@@ -115,7 +118,8 @@ function addStudentToCampus(student){
         "campusId": campusId, 
         "firstname": student.firstname,
         "lastname": student.lastname,
-        "id": student.id
+        "id": student.id,
+        "images": student.images
     })
 
     setSaveNotify({
@@ -134,7 +138,8 @@ function removeStudentFromCampus(student){
         "campusId": null, 
         "firstname": student.firstname,
         "lastname": student.lastname,
-        "id": student.id
+        "id": student.id,
+        "images": student.images
     })
 
     setRemoveNotify({
@@ -182,17 +187,22 @@ console.log(allStudents)
           </div>
           <form style={{textAlign: 'center'}} onSubmit={() => submitEditCampus()}>
             <label style= {{color:'#11153e', fontWeight: 'bold'}}>Campus Name: </label>
-            <input type="text" name="name" value={campusName} onChange ={(e) => setCampusName(e.target.value)} />
+            <input type="text" name="name" required value={campusName} onChange ={(e) => setCampusName(e.target.value)} />
             <br/>
             <br/>
 
             <label style={{color:'#11153e', fontWeight: 'bold'}}>Address: </label>
-            <input type="text" name="address" value={campusAddress} onChange={(e) => setCampusAddress(e.target.value)} />
+            <input type="text" name="address" required value={campusAddress} onChange={(e) => setCampusAddress(e.target.value)} />
             <br/>
             <br/>
 
             <label style={{color:'#11153e', fontWeight: 'bold'}}>Description: </label>
             <input type="text" name="description" value={campusDescription} onChange={(e) => setCampusDescription(e.target.value)} />
+            <br/>
+            <br/>
+
+            <label style={{color:'#11153e', fontWeight: 'bold'}}>Image: </label>
+            <input type="text" name="images" value={campusImage} onChange={(e) => setCampusImage(e.target.value)} />
             <br/>
             <br/>
 

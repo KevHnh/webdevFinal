@@ -10,11 +10,13 @@ const db = require('../db');  // Import Sequelize database instance called "db"
 const Campus = db.define("campus", {
   name: {
     type: Sequelize.STRING,
+    require: true,
     allowNull: false
   },
 
   address: {
     type: Sequelize.STRING,
+    require: true,
     allowNull: false
   },
 

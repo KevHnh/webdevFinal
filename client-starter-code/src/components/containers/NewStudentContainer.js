@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import NewStudentView from '../views/NewStudentView';
-import { addStudentThunk } from '../../store/thunks';
+import { addStudentThunk, fetchAllCampusesThunk } from '../../store/thunks';
 
 class NewStudentContainer extends Component {
   // Initialize state
@@ -20,8 +20,9 @@ class NewStudentContainer extends Component {
     this.state = {
       firstname: "", 
       lastname: "", 
-      campusId: "",
+      campusId: null,
       email:"",
+      images: "",
       GPA:"",
 
       redirect: false, 
@@ -45,22 +46,44 @@ class NewStudentContainer extends Component {
         lastname: this.state.lastname,
         campusId: this.state.campusId,
         email: this.state.email,
+        images: this.state.images,
         GPA: this.state.GPA,
     };
     
     // Add new student in back-end database
-    let newStudent = await this.props.addStudent(student);
 
     // Update state, and trigger redirect to show the new student
-    this.setState({
-      firstname: "", 
-      lastname: "", 
-      campusId: "", 
-      email:"",
-      GPA:"",
-      redirect: true, 
-      redirectId: newStudent.id
-    });
+
+    let newStudent = await this.props.addStudent(student);
+
+    console.log(student)
+
+    if (student.campusId === "" || student.campusId === null) {
+      console.log('POST');
+      this.setState({
+        firstname: "", 
+        lastname: "", 
+        campusId: "", 
+        email:"",
+        GPA:"",
+        images: "",
+        redirect: true, 
+        redirectId: newStudent.id
+      });
+    }
+    else if (newStudent === undefined) { 
+      console.log('2');
+      this.setState({
+        firstname: "", 
+        lastname: "", 
+        campusId: "", 
+        email:"",
+        GPA:"",
+        images: "",
+        redirect: false, 
+        redirectId: newStudent.id
+      });
+    }
   }
 
   // Unmount when the component is being removed from the DOM:
@@ -93,6 +116,7 @@ class NewStudentContainer extends Component {
 // The "mapDispatch" calls the specific Thunk to dispatch its action. The "dispatch" is a function of Redux Store.
 const mapDispatch = (dispatch) => {
     return({
+        fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
         addStudent: (student) => dispatch(addStudentThunk(student)),
     })
 }

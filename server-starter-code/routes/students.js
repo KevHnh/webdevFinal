@@ -44,15 +44,20 @@ router.post('/', async function(req, res, next) {
   var campusId = await Campus.findOne({where: {id: currID}});
 
   if (campusId) {
+    console.log("1")
     await Student.create(req.body)
     .then(createdStudent => res.status(200).json(createdStudent))
     .catch(err => next(err));
   }
-  else if (!campusId) {
-    console.log("CAMPUS ID DOES NOT EXISTS")
+  else if (currID !== null || currID !== "") {
+    console.log("2")
+    await Student.create(req.body)
+    .then(createdStudent => res.status(200).json(createdStudent))
+    .catch(err => next(err));
   }
   else {
-    console.log("ERROR OCCURRED")
+    console.log("3")
+    console.log("CAMPUS ID DOES NOT EXISTS")
   }
 });
 

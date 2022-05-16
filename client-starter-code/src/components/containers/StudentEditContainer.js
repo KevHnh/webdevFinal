@@ -23,6 +23,7 @@ class StudentEditContainer extends Component {
       campusId: "",
       email:"",
       GPA:"",
+      Image:"",
       redirect: false, 
       redirectId: null
     };
@@ -45,6 +46,7 @@ class StudentEditContainer extends Component {
         campusId: this.state.campusId,
         email: this.state.email,
         GPA: this.state.GPA,
+        images: this.state.Image,
     };
     
     // Add new student in back-end database
@@ -57,6 +59,7 @@ class StudentEditContainer extends Component {
       campusId: "", 
       email:"",
       GPA:"",
+      Image: "",
       redirect: true, 
       //redirectId: newStudent.id
     });

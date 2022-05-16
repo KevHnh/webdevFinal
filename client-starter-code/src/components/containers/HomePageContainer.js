@@ -7,6 +7,8 @@ If needed, it also defines the component's "connect" function.
 ================================================== */
 import Header from './Header';
 import HomePageView from '../views/HomePageView';
+import { Link } from 'react-router-dom';
+
 
 // Render Home page view by the corresponding View component
 const HomePageContainer = () => {
@@ -15,6 +17,7 @@ const HomePageContainer = () => {
       <Header />
       <HomePageView />
     </div>
+    
     
   );
 };
