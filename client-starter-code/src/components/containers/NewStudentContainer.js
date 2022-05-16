@@ -53,13 +53,18 @@ class NewStudentContainer extends Component {
     // Add new student in back-end database
 
     // Update state, and trigger redirect to show the new student
+    const axios = require('axios');
+    const array = [];
+    let newStudent;
+    let allCamp = await axios.get(`http://localhost:9000/api/campuses`); 
 
-    let newStudent = await this.props.addStudent(student);
+    for (let i = 0; i < allCamp.data.length; i++) {
+      array.push(allCamp.data[i].id);
+    }
 
-    console.log(student)
-
-    if (student.campusId === "" || student.campusId === null) {
-      console.log('POST');
+    if (student.campusId === null || array.includes(parseInt(student.campusId))) {
+      newStudent = await this.props.addStudent(student);
+      
       this.setState({
         firstname: "", 
         lastname: "", 
@@ -71,8 +76,8 @@ class NewStudentContainer extends Component {
         redirectId: newStudent.id
       });
     }
-    else if (newStudent === undefined) { 
-      console.log('2');
+    else {
+      alert("Campus ID Does Not Exist")
       this.setState({
         firstname: "", 
         lastname: "", 
@@ -81,8 +86,8 @@ class NewStudentContainer extends Component {
         GPA:"",
         images: "",
         redirect: false, 
-        redirectId: newStudent.id
       });
+      window.location.reload(false);
     }
   }
 
