@@ -79,15 +79,15 @@ class NewStudentContainer extends Component {
     else {
       alert("Campus ID Does Not Exist")
       this.setState({
-        firstname: "", 
-        lastname: "", 
-        campusId: "", 
-        email:"",
-        GPA:"",
-        images: "",
+        firstname: this.state.firstname,
+        lastname: this.state.lastname,
+        campusId: this.state.campusId,
+        email: this.state.email,
+        GPA: this.state.GPA,
+        images: this.state.images,
         redirect: false, 
       });
-      window.location.reload(false);
+      //window.location.reload(false);
     }
   }
 

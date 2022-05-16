@@ -106,7 +106,7 @@ async function submitEditStudent(){
       }
     }
    
-    if(x){
+    if(x && studentCampusId === null){
       alert(`There is no campus with the id ${studentCampusId}`)
     }
     
@@ -120,7 +120,8 @@ async function submitEditStudent(){
     }
    
     else{
-      alert("submitted successfuly")
+      //alert("submitted successfuly")
+      alert(`Hello ${studentCampusId}`)
       await axios.put(`http://localhost:9000/api/students/${studentId}`, {
           "firstname": studentFirstName, 
           "lastname": studentLastName, 
@@ -129,7 +130,7 @@ async function submitEditStudent(){
           "GPA" : studentGPA,
           "images" : studentImage
       })
-      window.location.reload(false);
+      //window.location.reload(false);
    
   }
     
@@ -140,6 +141,7 @@ function handleConfirmDialog(){
 }
 
 console.log(items)
+console.log(studentCampusId)
   // Render a New Student view with an input form
   return (
     <div>
@@ -165,7 +167,7 @@ console.log(items)
             <br/>
 
             <label style={{color:'#11153e', fontWeight: 'bold'}}>Campus Id: </label>
-            <input type="text" name="campusId" required value={studentCampusId} onChange ={(e) => setStudentCampusId(e.target.value)} />
+            <input type="text" name="campusId" value={studentCampusId} onChange ={(e) => setStudentCampusId(e.target.value)} />
             <br/>
             <br/>
 
@@ -179,7 +181,7 @@ console.log(items)
             <br/>
             <br/>
 
-            <label style={{color:'#11153e', fontWeight: 'bold'}}>GPA: </label>
+            <label style={{color:'#11153e', fontWeight: 'bold'}}>Image: </label>
             <input type="text" name="Image" required value={studentImage} onChange ={(e) => setStudentImage(e.target.value)} />
             <br/>
             <br/>
