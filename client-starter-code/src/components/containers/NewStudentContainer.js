@@ -13,14 +13,6 @@ import { Redirect } from "react-router-dom";
 import NewStudentView from "../views/NewStudentView";
 import { addStudentThunk, fetchAllCampusesThunk } from "../../store/thunks";
 
-function isImage(url) {
-  return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
-}
-
-function isImage(url) {
-  return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
-}
-
 class NewStudentContainer extends Component {
   // Initialize state
   constructor(props) {
