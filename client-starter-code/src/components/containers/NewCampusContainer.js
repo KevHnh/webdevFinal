@@ -23,6 +23,7 @@ class NewCampusContainer extends Component {
       name: "", 
       address: "", 
       description: "", 
+      images: "",
       redirect: false, 
       redirectId: null
     };
@@ -38,21 +39,28 @@ class NewCampusContainer extends Component {
   // Take action after user click the submit button
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
+    let imageLink = this.state.images === null;
+    
+    if (this.state.images === null || this.state.images === "" || this.state.images === undefined) {
+      imageLink = "https://thumbs.dreamstime.com/b/illustration-building-icon-white-background-building-icon-white-background-107844010.jpg";
+    }
+
     let campus = {
         name: this.state.name,
         address: this.state.address,
-        description: this.state.description
+        description: this.state.description,
+        images: imageLink
     };
     
     // Add new student in back-end database
     let newCampus = await this.props.addCampus(campus);
-    console.log(newCampus)
 
     // Update state, and trigger redirect to show the new student
     this.setState({
       name: "", 
       address: "", 
       description: "", 
+      images: "",
       redirect: true, 
       redirectId: newCampus.id
     });
@@ -75,8 +83,8 @@ class NewCampusContainer extends Component {
       <div>
         <Header />
         <NewCampusView 
-          //handleChange = {this.handleChange} 
-          //handleSubmit={this.handleSubmit}      
+          handleChange = {this.handleChange} 
+          handleSubmit={this.handleSubmit}      
         />
       </div>          
     );
