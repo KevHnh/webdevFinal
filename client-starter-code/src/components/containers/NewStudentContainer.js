@@ -40,13 +40,22 @@ class NewStudentContainer extends Component {
   // Take action after user click the submit button
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
+    let campId, imageLink;
+
+    if (this.state.campusId === "" || this.state.campusId === null || this.state.campusId === undefined) {
+      campId = null;
+    } 
+
+    if (this.state.images === "" || this.state.images === null || this.state.images === undefined) {
+      imageLink = "https://static.vecteezy.com/system/resources/previews/002/318/271/original/user-profile-icon-free-vector.jpg";
+    }
 
     let student = {
         firstname: this.state.firstname,
         lastname: this.state.lastname,
-        campusId: this.state.campusId,
+        campusId: campId,
         email: this.state.email,
-        images: this.state.images,
+        images: imageLink,
         GPA: this.state.GPA,
     };
     
@@ -62,7 +71,10 @@ class NewStudentContainer extends Component {
       array.push(allCamp.data[i].id);
     }
 
-    if (student.campusId === null || array.includes(parseInt(student.campusId))) {
+    if (student.GPA > 4 || student.GPA < 0) {
+      alert("Student GPA Not Valid")
+    }
+    else if (student.campusId === null || array.includes(parseInt(student.campusId))) {
       newStudent = await this.props.addStudent(student);
       
       this.setState({
@@ -78,16 +90,6 @@ class NewStudentContainer extends Component {
     }
     else {
       alert("Campus ID Does Not Exist")
-      this.setState({
-        firstname: "", 
-        lastname: "", 
-        campusId: "", 
-        email:"",
-        GPA:"",
-        images: "",
-        redirect: false, 
-      });
-      window.location.reload(false);
     }
   }
 
