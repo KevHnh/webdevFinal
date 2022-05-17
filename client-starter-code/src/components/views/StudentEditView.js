@@ -100,10 +100,19 @@ console.log(allCampuses)
 async function submitEditStudent(){
 
     var x = true
+    var scampusId = studentCampusId
+    if(scampusId === null || scampusId === "" || scampusId === undefined){
+      scampusId = ""
+    }
+
     for(let i = 0; i < allCampuses.length; i++){
-      if(studentCampusId.toString() === allCampuses[i].id.toString()){
+      if(scampusId === allCampuses[i].id.toString()){
           x = false
       }
+    }
+
+    if(scampusId.length === 0){
+      x = false
     }
    
     if(x){
@@ -121,17 +130,29 @@ async function submitEditStudent(){
    
     else{
       alert("submitted successfuly")
-      await axios.put(`http://localhost:9000/api/students/${studentId}`, {
-          "firstname": studentFirstName, 
-          "lastname": studentLastName, 
-          "campusId": studentCampusId,
-          "email": studentEmail,
-          "GPA" : studentGPA,
-          "images" : studentImage
-      })
-      window.location.reload(false);
+      if(scampusId.length === 0){
+          await axios.put(`http://localhost:9000/api/students/${studentId}`, {
+            "firstname": studentFirstName, 
+            "lastname": studentLastName, 
+            "campusId": null,
+            "email": studentEmail,
+            "GPA" : studentGPA,
+            "images" : studentImage
+        })
+      }
+      else{
+        await axios.put(`http://localhost:9000/api/students/${studentId}`, {
+            "firstname": studentFirstName, 
+            "lastname": studentLastName, 
+            "campusId": scampusId,
+            "email": studentEmail,
+            "GPA" : studentGPA,
+            "images" : studentImage
+        })
+        //window.location.reload(false);
    
-  }
+      }
+    }
     
 }
 
@@ -165,7 +186,7 @@ console.log(items)
             <br/>
 
             <label style={{color:'#11153e', fontWeight: 'bold'}}>Campus Id: </label>
-            <input type="text" name="campusId" required value={studentCampusId} onChange ={(e) => setStudentCampusId(e.target.value)} />
+            <input type="text" name="campusId" value={studentCampusId === null ? "" : studentCampusId} onChange ={(e) => setStudentCampusId(e.target.value)} />
             <br/>
             <br/>
 
@@ -179,7 +200,7 @@ console.log(items)
             <br/>
             <br/>
 
-            <label style={{color:'#11153e', fontWeight: 'bold'}}>GPA: </label>
+            <label style={{color:'#11153e', fontWeight: 'bold'}}>Images: </label>
             <input type="text" name="Image" required value={studentImage} onChange ={(e) => setStudentImage(e.target.value)} />
             <br/>
             <br/>

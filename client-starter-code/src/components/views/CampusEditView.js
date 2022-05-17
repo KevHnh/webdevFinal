@@ -252,7 +252,7 @@ console.log(allStudents)
       {/* adding a student to campus notification*/}
       <Snackbar
             open={saveNotify.isOpen}
-            autoHideDuration={3000}
+            autoHideDuration={1000}
             anchorOrigin={{vertical:'top', horizontal:'right'}}
             onClose={handleSave}
             >

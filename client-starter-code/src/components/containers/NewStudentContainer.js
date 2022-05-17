@@ -13,6 +13,10 @@ import { Redirect } from 'react-router-dom';
 import NewStudentView from '../views/NewStudentView';
 import { addStudentThunk, fetchAllCampusesThunk } from '../../store/thunks';
 
+function isImage(url) {
+  return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
+}
+
 class NewStudentContainer extends Component {
   // Initialize state
   constructor(props){
@@ -30,6 +34,8 @@ class NewStudentContainer extends Component {
     };
   }
 
+
+
   // Capture input data when it is entered
   handleChange = event => {
     this.setState({
@@ -40,7 +46,10 @@ class NewStudentContainer extends Component {
   // Take action after user click the submit button
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
-    let campId, imageLink;
+    let campId = this.state.campusId
+    let imageLink = this.state.images;
+    
+    
 
     if (this.state.campusId === "" || this.state.campusId === null || this.state.campusId === undefined) {
       campId = null;
