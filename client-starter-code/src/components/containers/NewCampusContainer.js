@@ -39,7 +39,7 @@ class NewCampusContainer extends Component {
   // Take action after user click the submit button
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
-    let imageLink = this.state.images === null;
+    let imageLink = this.state.images;
     
     if (this.state.images === null || this.state.images === "" || this.state.images === undefined) {
       imageLink = "https://thumbs.dreamstime.com/b/illustration-building-icon-white-background-building-icon-white-background-107844010.jpg";
