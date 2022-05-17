@@ -10,10 +10,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import {useParams} from 'react-router-dom'
 import axios from 'axios'
 import { useEffect, useState } from 'react';
-import { Alert } from '@material-ui/lab'
-import { Snackbar } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
-import { Dialog, DialogContent} from '@material-ui/core'
 
 // Create styling for the input form
 const useStyles = makeStyles( () => ({
@@ -53,9 +49,10 @@ const StudentEditView = (props) => {
   const [studentEmail, setStudentEmail] = useState("")
   const [studentImage, setStudentImage] = useState("")
   const [studentGPA, setStudentGPA] = useState("")
-  const [ gpaNotify, setGPANotify ] = useState(false)
+  
 
 
+// get the students information when the page is first loaded
 useEffect(()=>{
     loadStudent();
 },[])
@@ -78,6 +75,8 @@ const fetchStudentJson = async () => {
     setStudentImage(items.images)
 }
 
+
+// get all campus information when the page loads
 useEffect(()=>{
   loadCampus();
 },[])
@@ -96,32 +95,33 @@ const fetchCampusJson = async () => {
 }
 
 
-console.log(allCampuses)
+// submit the edited student information
 async function submitEditStudent(){
 
     var x = true
     var scampusId = studentCampusId
+    // check if studentCampusId is null
     if(scampusId === null || scampusId === "" || scampusId === undefined){
       scampusId = ""
-    }
-
-    for(let i = 0; i < allCampuses.length; i++){
-      if(scampusId === allCampuses[i].id.toString()){
-          x = false
-      }
-    }
-
-    if(scampusId.length === 0){
       x = false
     }
-   
+    
+    // check if campus Id exists
+    else{
+      for(let i = 0; i < allCampuses.length; i++){
+        if(scampusId.toString() === allCampuses[i].id.toString()){
+            x = false
+        }
+      }
+    }
+    
     if(x){
-      alert(`There is no campus with the id ${studentCampusId}`)
+      alert(`There is no campus with the id ${scampusId}`)
     }
     
     else if(parseFloat(studentGPA) > 4.0 || parseFloat(studentGPA) < 0.0){
       alert("GPA must be a decimal between 0.0 and 4.0")
-      //setGPANotify(true)
+      
     }
 
     else if(isNaN(parseFloat(studentGPA))){
@@ -149,16 +149,13 @@ async function submitEditStudent(){
             "GPA" : studentGPA,
             "images" : studentImage
         })
-        //window.location.reload(false);
+        
    
       }
     }
     
 }
 
-function handleConfirmDialog(){
-  setGPANotify(false)
-}
 
 console.log(items)
   // Render a New Student view with an input form
@@ -214,14 +211,6 @@ console.log(items)
           </div>
           
       </div>
-      <Dialog open={gpaNotify} >
-          <DialogContent>
-              <Typography variant='h6'>
-                  GPA must be a decimal between 0.0 and 4.0
-              </Typography>
-              <Button variant='contained' color="primary" onClick={handleConfirmDialog} style={{fontSize:"14px"}}>Ok</Button>
-          </DialogContent>
-      </Dialog>
     </div>    
   )
 }

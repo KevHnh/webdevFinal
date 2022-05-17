@@ -20,8 +20,10 @@ const CampusView = (props) => {
       <img src={campus.images} width="300"></img>
       <p>campus address: {campus.address}</p>
       <p>campus description: {campus.description}</p>
-      <p>Enrolled students</p>
+      <br/>
+      <h1>Enrolled students</h1>
 
+      {/* print all enrolled students */}
       { 
         campus.students.length > 0 ?
         (

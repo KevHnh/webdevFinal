@@ -31,7 +31,6 @@ class NewStudentContainer extends Component {
   }
 
 
-
   // Capture input data when it is entered
   handleChange = (event) => {
     this.setState({
@@ -45,6 +44,7 @@ class NewStudentContainer extends Component {
     let campId = this.state.campusId;
     let imageLink = this.state.images;
 
+    // check if campus id is null
     if (
       this.state.campusId === "" ||
       this.state.campusId === null ||
@@ -53,6 +53,7 @@ class NewStudentContainer extends Component {
       campId = null;
     }
 
+    // check if images is empty
     if (
       this.state.images === "" ||
       this.state.images === null ||

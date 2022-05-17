@@ -14,6 +14,8 @@ const StudentView = (props) => {
     <div>
       <h1>{student.firstname + " " + student.lastname}</h1>
       <img src={student.images} width="300"></img>
+
+      {/* check if student has a campusId print it out. If not print they dont have a campus*/}
       {
         student.campusId !== null ?
         (
@@ -26,6 +28,7 @@ const StudentView = (props) => {
         )
       }
 
+      {/* check if student has an email print it out. If not print NaN */}
       {
         student.email !== "" ?
         (

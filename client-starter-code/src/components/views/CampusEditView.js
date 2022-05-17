@@ -55,11 +55,8 @@ const CampusEditView = (props) => {
   const [ removeNotify, setRemoveNotify ] = useState({isOpen:false, message:"", type:""})
 
 const navigate = useHistory();
-//const navigate = useNavigate();
-//const redirectPage = (path) => {
- //   navigate.push(path)
-//} 
 
+// load all students from db
 useEffect(()=>{
     loadAllStudents();
 },[])
@@ -76,7 +73,7 @@ const fetchStudentJson = async () => {
     setAllStudents(allStudents)
 }
 
-
+// load all campuses from db
 useEffect(()=>{
     loadCampus();
 },[])
@@ -97,6 +94,7 @@ const fetchJson = async () => {
     setCampusImage(items.images)
 }
 
+// submit the edited changes for campus in db
 async function submitEditCampus(){
    
     await axios.put(`http://localhost:9000/api/campuses/${campusId}`, {
@@ -108,10 +106,9 @@ async function submitEditCampus(){
     
     //redirectPage(`/campuses`)
     //navigate.push(`/campuses`)
-    
-    
 }
 
+// add new student campus id in db
 function addStudentToCampus(student){
     axios.put(`http://localhost:9000/api/students/${student.id}`, {
         "campus":student.campus, 
@@ -132,6 +129,8 @@ function addStudentToCampus(student){
     
 }
 
+
+// remove student campus id in db
 function removeStudentFromCampus(student){
     axios.put(`http://localhost:9000/api/students/${student.id}`, {
         "campus":student.campus, 
@@ -151,6 +150,7 @@ function removeStudentFromCampus(student){
     loadAllStudents();
 }
 
+// change the state of saveNotify
 const handleSave = (event, reason) =>{
     setSaveNotify({
        ...saveNotify,
@@ -160,6 +160,7 @@ const handleSave = (event, reason) =>{
     window.location.reload(false)
 }
 
+// change the state of removeNotify
 const handleRemove = (event, reason) =>{
     setRemoveNotify({
        ...saveNotify,
@@ -213,7 +214,9 @@ console.log(allStudents)
             <br/>
 
           </form>
-            <div>Currently enrolled students</div>
+          {/*  print all currenly enrolled students in the campus */}
+            <br/>
+            <h3>Currently enrolled students</h3>
 
 
             {
@@ -230,7 +233,9 @@ console.log(allStudents)
 
             <br/>
             <br/>
-            <div>All Students</div>
+
+             {/* print all students */}
+            <h3>All Students</h3>
             {
                 allStudents.map((students,pos)=>{
                     return(

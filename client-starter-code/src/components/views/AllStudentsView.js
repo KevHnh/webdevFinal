@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 
 const AllStudentsView = (props) => {
   const {students, deleteStudent} = props;
+  
   // If there is no student, display a message
   if (!students.length) {
     return (
