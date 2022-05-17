@@ -16,7 +16,10 @@ import { Link } from 'react-router-dom';
 // Define styling for the header
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
+    position:'sticky',
+    width: '100%',
+    top: '0',
+    zIndex: '1',
   },
   title: {
     flexGrow: 1,

@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    overflow: 'hidden',
   },
   title: {
     flexGrow: 1,
@@ -31,8 +32,49 @@ const useStyles = makeStyles(theme => ({
     width: "50%",
     margin: "auto",
   },
-  links:{
+  linksContainer:{
     textDecoration: 'none',
+    marginTop: '10px',
+    marginBottom: '10px',
+  },
+  buttonHome: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    width: '100%'
+  },
+  buttonContainer: {
+    paddingRight: '150px',
+    paddingLeft: '150px',
+    fontSize: '40px',
+    paddingTop: '30px',
+    paddingBottom: '30px',
+  },
+  titleHome: {
+    fontSize: '60px',
+    margin: '0',
+    color:'white',
+    paddingTop: '200px',
+  },
+  brightness: {
+    background: 'rgba(0, 0, 0, 0.5)',
+    width: '100%',
+    height: '93.4vh',
+    display: 'fixed',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: '500',
+  },
+  background1: {
+    background: 'url("https://www.collegedata.com/hs-fs/collegedata/images/article/being-involved-header.jpg")',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: '50% 0',
+    backgroundSize: 'cover',
+  },
+  homeContainer: {
+    margin: '0',
+    height: 'auto',
   }
 }));
 
@@ -40,20 +82,25 @@ const HomePageView = () => {
   // Render Home page view
   const classes = useStyles();
   return (
-    <div >
-      <h1>Home Page</h1>
+    <div className={classes.homeContainer}>
+      <div className={classes.background1}>
+        <div className={classes.brightness}>
+          <h1 className={classes.titleHome}>Home</h1>
+            <div className={classes.buttonHome}>
+              <Link className={classes.linksContainer} to={'/campuses'} >
+                    <Button variant="contained" color="primary" className={classes.buttonContainer}>
+                      All Campuses
+                    </Button>
+                  </Link>
 
-      <Link className={classes.links} to={'/campuses'} >
-            <Button variant="contained" color="primary" style={{marginRight: '10px'}}>
-              All Campuses
-            </Button>
-          </Link>
-
-          <Link className={classes.links} to={'/students'} >
-            <Button variant="contained" color="primary">
-              All Students
-            </Button>
-          </Link>
+              <Link className={classes.linksContainer} to={'/students'} >
+                <Button variant="contained" color="primary" className={classes.buttonContainer}>
+                  All Students
+                </Button>
+              </Link>
+              </div>
+            </div>
+        </div>
     </div>
   );    
 }

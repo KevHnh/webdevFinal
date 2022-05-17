@@ -13,8 +13,6 @@ import {
 } from './components/containers';
 
 import NewCampusContainer from "./components/containers/NewCampusContainer";
-import CampusEditContainer from "./components/containers/CampusEditContainer";
-import StudentEditContainer from "./components/containers/StudentEditContainer";
 import StudentEditView from "./components/views/StudentEditView";
 import { CampusEditView } from "./components/views";
 // if you create separate components for adding/editing 
