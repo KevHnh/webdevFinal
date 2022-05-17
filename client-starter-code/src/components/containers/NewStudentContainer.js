@@ -40,7 +40,8 @@ class NewStudentContainer extends Component {
   // Take action after user click the submit button
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
-    let campId, imageLink;
+    let campId = this.state.campusId; 
+    let imageLink = this.state.images;
 
     if (this.state.campusId === "" || this.state.campusId === null || this.state.campusId === undefined) {
       campId = null;

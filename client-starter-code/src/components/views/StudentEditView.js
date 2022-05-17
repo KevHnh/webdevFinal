@@ -102,7 +102,11 @@ async function submitEditStudent(){
     var x = true
     for(let i = 0; i < allCampuses.length; i++){
       if(studentCampusId.toString() === allCampuses[i].id.toString()){
-          x = false
+        x = false
+      }
+      else if (studentCampusId.toString() === null || studentCampusId.toString() === "" || studentCampusId.toString() === undefined) {
+        x = false
+        break;
       }
     }
    
@@ -165,7 +169,7 @@ console.log(items)
             <br/>
 
             <label style={{color:'#11153e', fontWeight: 'bold'}}>Campus Id: </label>
-            <input type="text" name="campusId" required value={studentCampusId} onChange ={(e) => setStudentCampusId(e.target.value)} />
+            <input type="text" name="campusId" value={studentCampusId} onChange ={(e) => setStudentCampusId(e.target.value)} />
             <br/>
             <br/>
 
